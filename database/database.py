@@ -4,10 +4,14 @@ from bson import ObjectId
 from pydantic.networks import EmailStr
 import ssl
 import pymongo 
+import os
 from models import  * 
+from dotenv import load_dotenv
 
-dev = 'mongodb+srv://Rania_Hamdeni:careerboosts2000@cluster0.vfuyb.mongodb.net/test?authSource=admin&replicaSet=atlas-12sscv-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true'
-client = pymongo.MongoClient(dev, ssl=True)
+load_dotenv()
+
+mongo_details = os.getenv('MONGO_DETAILS')
+client = pymongo.MongoClient(mongo_details, ssl=True)
 database = client['Skills-Framework']
 
 Roles_collection = database.get_collection('Roles')
